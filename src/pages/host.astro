@@ -1,0 +1,109 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { site } from '../data/site';
+
+const steps = [
+  { title: 'Reach out', text: "Call or email us using the contact information below and we'll talk through next steps with you." },
+  { title: 'Get trained', text: 'Join a short host training covering hospitality, leading discussion, and caring for people.' },
+  { title: 'Experience one', text: 'Visit an existing home church to see how it runs before you open your own door.' },
+  { title: 'Launch', text: 'Start with a few friends and neighbors. A coach will check in with you regularly.' },
+];
+
+const faqs = [
+  { q: 'Do I need to be a Bible teacher?', a: 'No. Hosts facilitate conversation. We provide simple discussion guides each week.' },
+  { q: 'How big is my home supposed to be?', a: 'Any size works. Many home churches start with 6–12 people in a living room or apartment.' },
+  { q: 'What about kids?', a: 'Each home church decides what works. We have resources for including kids in the gathering.' },
+  { q: 'How much time does it take?', a: 'Plan on one evening a week for the gathering plus a little time to prepare and check in with people.' },
+];
+---
+
+<BaseLayout title="Host a Home Church" description="Open your home and start a home church. We'll train and support you.">
+  <PageHero
+    eyebrow="Open your door"
+    title="Host a home church"
+    lead="You don't need a stage, a building, or a seminary degree. You need a table, an open heart, and a willingness to love people. We'll help with the rest."
+  />
+
+  <section class="section">
+    <div class="container">
+      <span class="eyebrow">The path</span>
+      <h2>Four steps to launch</h2>
+      <ol class="steps grid grid--2">
+        {steps.map((s, i) => (
+          <li class="card">
+            <span class="num">{String(i + 1).padStart(2, '0')}</span>
+            <h3>{s.title}</h3>
+            <p>{s.text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section section--dark">
+    <div class="container">
+      <span class="eyebrow">Questions</span>
+      <h2>Frequently asked</h2>
+      <div class="faq">
+        {faqs.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="interest">
+    <div class="container">
+      <span class="eyebrow">Get started</span>
+      <h2>Interested in hosting?</h2>
+      <p class="lead">Reach out and we'll help you take the next step.</p>
+      <div class="contact-grid">
+        <div class="card">
+          <h3>Email</h3>
+          <p><a href={`mailto:${site.email}`}>{site.email}</a></p>
+        </div>
+        <div class="card">
+          <h3>Phone</h3>
+          <p><a href={`tel:${site.phone}`}>{site.phone}</a></p>
+        </div>
+        <div class="card">
+          <h3>Address</h3>
+          <p>{site.address}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .steps { list-style: none; padding: 0; margin: 0; }
+  .num {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--olive-500);
+    margin-bottom: 0.25rem;
+  }
+  .faq { display: grid; gap: 0.75rem; max-width: 780px; }
+  details {
+    background: #1b1d17;
+    border-radius: var(--radius);
+    border-left: 4px solid var(--olive-500);
+    padding: 1rem 1.25rem;
+  }
+  summary { cursor: pointer; font-weight: 600; color: var(--white); }
+  details p { margin: 0.75rem 0 0; }
+  .contact-grid {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    margin-top: 1.5rem;
+  }
+  .contact-grid h3 { margin-top: 0; }
+  .contact-grid a { font-weight: 600; overflow-wrap: anywhere; }
+</style>

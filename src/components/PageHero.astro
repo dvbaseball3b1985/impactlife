@@ -1,0 +1,30 @@
+---
+interface Props {
+  eyebrow?: string;
+  title: string;
+  lead?: string;
+}
+const { eyebrow, title, lead } = Astro.props;
+---
+
+<section class="page-hero">
+  <div class="container">
+    {eyebrow && <span class="eyebrow">{eyebrow}</span>}
+    <h1>{title}</h1>
+    {lead && <p class="lead">{lead}</p>}
+    <slot />
+  </div>
+</section>
+
+<style>
+  .page-hero {
+    background:
+      linear-gradient(135deg, rgb(14 15 12 / 0.94), rgb(42 51 22 / 0.9)),
+      repeating-linear-gradient(45deg, var(--olive-700) 0 2px, transparent 2px 14px);
+    color: var(--olive-100);
+    padding-block: clamp(3.5rem, 9vw, 6rem);
+  }
+  h1 { color: var(--white); max-width: 22ch; }
+  .eyebrow { color: var(--olive-300); }
+  .lead { color: var(--olive-100); }
+</style>

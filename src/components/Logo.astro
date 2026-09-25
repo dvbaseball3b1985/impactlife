@@ -1,0 +1,31 @@
+---
+// Vector recreation of public/logo.png. Dark parts use currentColor so the
+// logo works on light or dark backgrounds; set --logo-bg to the background
+// color so the cross's hollow center matches it.
+interface Props {
+  height?: number;
+  class?: string;
+}
+const { height = 56, class: className } = Astro.props;
+const cross = 'M288 5H302V77H378V103H302V300H288V103H202V77H288Z';
+---
+
+<svg
+  class:list={['logo', className]}
+  viewBox="0 0 500 310"
+  height={height}
+  width={Math.round((height * 500) / 310)}
+  role="img"
+  aria-label="Impact Life"
+>
+  <g font-family="'Inter Variable', 'Century Gothic', Arial, sans-serif" font-size="92" font-weight="350">
+    <text x="10" y="200" textLength="268" lengthAdjust="spacingAndGlyphs" fill="currentColor">IMPAC</text>
+    <text x="314" y="200" textLength="172" lengthAdjust="spacingAndGlyphs" fill="#8cb13b">LIFE</text>
+  </g>
+  <path d={cross} transform="translate(4 4)" fill="none" stroke="currentColor" stroke-width="3" opacity="0.55" />
+  <path d={cross} fill="var(--logo-bg, #fff)" stroke="currentColor" stroke-width="4" />
+</svg>
+
+<style>
+  .logo { display: block; overflow: visible; }
+</style>

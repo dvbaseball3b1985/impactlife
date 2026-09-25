@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+---
+
+<BaseLayout title="Page not found">
+  <PageHero eyebrow="404" title="This door isn't open." lead="The page you're looking for doesn't exist, but there's still a seat at the table.">
+    <div class="btn-row">
+      <a class="btn btn--primary" href="/">Go home</a>
+      <a class="btn btn--outline" href="/home-churches">Find a Home Church</a>
+    </div>
+  </PageHero>
+</BaseLayout>

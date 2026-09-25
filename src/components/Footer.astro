@@ -1,0 +1,50 @@
+---
+import { nav, site } from '../data/site';
+import Logo from './Logo.astro';
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container cols">
+    <div>
+      <Logo height={80} class="footer-logo" />
+      <p>{site.tagline}</p>
+    </div>
+    <div>
+      <p class="heading">Explore</p>
+      <ul>
+        {nav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+      </ul>
+    </div>
+    <div>
+      <p class="heading">Get in touch</p>
+      <p>
+        <a href={`mailto:${site.email}`}>{site.email}</a><br />
+        <a href={`tel:${site.phone}`}>{site.phone}</a><br />
+        {site.address}
+      </p>
+    </div>
+  </div>
+  <div class="container legal">© {year} {site.name}. All rights reserved.</div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--black);
+    color: #b9bca9;
+    padding-top: 3rem;
+    border-top: 6px solid var(--olive-600);
+    font-size: 0.95rem;
+  }
+  .cols {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+  .site-footer :global(.footer-logo) { color: var(--white); --logo-bg: var(--black); margin-bottom: 1rem; }
+  .heading { color: var(--olive-300); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.8rem; }
+  ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.35rem; }
+  a { color: var(--olive-100); text-decoration: none; }
+  a:hover { color: var(--white); text-decoration: underline; }
+  .legal { border-top: 1px solid #2a2c25; margin-top: 2rem; padding-block: 1.25rem; font-size: 0.85rem; }
+</style>

@@ -1,0 +1,113 @@
+---
+import { nav } from '../data/site';
+import Logo from './Logo.astro';
+
+const current = Astro.url.pathname.replace(/\/$/, '') || '/';
+---
+
+<header class="site-header">
+  <div class="container bar">
+    <a href="/" class="brand">
+      <Logo height={72} />
+    </a>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="site-nav">
+      <span class="sr-only">Menu</span>
+      <span class="burger" aria-hidden="true"></span>
+    </button>
+    <nav id="site-nav" aria-label="Main">
+      <ul>
+        {nav.map((item) => (
+          <li>
+            <a href={item.href} aria-current={current === item.href ? 'page' : undefined}>
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
+  const navEl = document.getElementById('site-nav');
+  toggle?.addEventListener('click', () => {
+    const open = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!open));
+    navEl?.classList.toggle('open', !open);
+  });
+</script>
+
+<style>
+  .site-header {
+    background: var(--black);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    border-bottom: 3px solid var(--olive-600);
+  }
+  .bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 68px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    color: var(--white);
+    --logo-bg: var(--black);
+    padding-block: 0.25rem;
+  }
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 0.25rem;
+    margin: 0;
+    padding: 0;
+  }
+  nav a {
+    display: block;
+    padding: 0.5rem 0.8rem;
+    color: var(--olive-100);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    border-radius: 6px;
+  }
+  nav a:hover { color: var(--white); background: var(--olive-900); }
+  nav a[aria-current="page"] { color: var(--white); background: var(--olive-600); }
+
+  .menu-toggle {
+    display: none;
+    background: none;
+    border: 0;
+    padding: 0.75rem;
+    cursor: pointer;
+  }
+  .burger, .burger::before, .burger::after {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--white);
+    position: relative;
+  }
+  .burger::before, .burger::after { content: ""; position: absolute; }
+  .burger::before { top: -7px; }
+  .burger::after { top: 7px; }
+
+  @media (max-width: 900px) {
+    .menu-toggle { display: block; }
+    nav {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: var(--black);
+      border-bottom: 3px solid var(--olive-600);
+    }
+    nav.open { display: block; }
+    nav ul { flex-direction: column; padding: 0.5rem 1rem 1rem; }
+  }
+</style>

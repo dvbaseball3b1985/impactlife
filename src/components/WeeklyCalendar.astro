@@ -1,0 +1,106 @@
+---
+import { homeChurches } from '../data/site';
+
+const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+// "6:30 PM" -> minutes since midnight, for sorting within a day
+const toMinutes = (time: string) => {
+  const [, h, m, period] = time.match(/(\d+):(\d+)\s*(AM|PM)/i) ?? [];
+  if (!h) return 0;
+  return ((Number(h) % 12) + (period.toUpperCase() === 'PM' ? 12 : 0)) * 60 + Number(m);
+};
+
+const week = days.map((day) => ({
+  day,
+  groups: homeChurches
+    .filter((c) => c.day === day)
+    .sort((a, b) => toMinutes(a.time) - toMinutes(b.time)),
+}));
+---
+
+<div class="calendar" role="list" aria-label="Weekly home church schedule">
+  {week.map(({ day, groups }) => (
+    <div class={`day ${groups.length ? '' : 'empty'}`} role="listitem">
+      <h3 class="day-name">
+        <span class="long">{day}</span>
+        <span class="short" aria-hidden="true">{day.slice(0, 3)}</span>
+      </h3>
+      {groups.length ? (
+        <ul>
+          {groups.map((g) => (
+            <li>
+              <a href="/contact">
+                <span class="time">{g.time}</span>
+                <span class="name">{g.name}</span>
+                {g.kids && <span class="area">Kids welcome</span>}
+              </a>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p class="none">No groups yet</p>
+      )}
+    </div>
+  ))}
+</div>
+
+<style>
+  .calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    background: var(--olive-100);
+    gap: 1px;
+    border: 1px solid var(--olive-100);
+  }
+  .day { background: var(--white); min-height: 220px; display: flex; flex-direction: column; }
+  .day.empty { background: #fafaf5; }
+  .day-name {
+    margin: 0;
+    padding: 0.7rem 0.5rem;
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-align: center;
+    border-bottom: 3px solid var(--olive-600);
+  }
+  .long { display: none; }
+  ul { list-style: none; margin: 0; padding: 0.5rem; display: grid; gap: 0.5rem; }
+  li a {
+    display: block;
+    padding: 0.6rem 0.65rem;
+    border-radius: 6px;
+    background: var(--olive-100);
+    border-left: 3px solid var(--olive-600);
+    color: var(--ink);
+    text-decoration: none;
+    line-height: 1.35;
+    transition: background 0.15s, color 0.15s;
+  }
+  li a:hover { background: var(--olive-600); color: var(--white); }
+  li a:hover .time, li a:hover .area { color: var(--olive-100); }
+  .time { display: block; font-size: 0.8rem; font-weight: 700; color: var(--olive-700); }
+  .name { display: block; font-weight: 600; font-size: 0.92rem; }
+  .area { display: block; font-size: 0.78rem; color: var(--muted); margin-top: 0.15rem; }
+  .none { margin: auto; padding: 1rem 0.5rem; font-size: 0.85rem; color: #9a9d8e; text-align: center; }
+
+  /* Stack into a list on smaller screens */
+  @media (max-width: 860px) {
+    .calendar { grid-template-columns: 1fr; }
+    .day { min-height: 0; display: grid; grid-template-columns: 7.5rem 1fr; }
+    .day-name { text-align: left; display: flex; align-items: center; padding-inline: 1rem; border-bottom: 0; border-right: 3px solid var(--olive-600); }
+    .long { display: inline; }
+    .short { display: none; }
+    .none { margin: 0; text-align: left; padding: 0.9rem 0.75rem; }
+  }
+  @media (max-width: 480px) {
+    .day { grid-template-columns: 1fr; }
+    .day-name { border-right: 0; border-bottom: 3px solid var(--olive-600); }
+  }
+</style>

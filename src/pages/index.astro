@@ -1,0 +1,136 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CallToAction from '../components/CallToAction.astro';
+import WeeklyCalendar from '../components/WeeklyCalendar.astro';
+import { site, events } from '../data/site';
+
+const pillars = [
+  { title: 'Gather', text: 'Small groups meet in homes each week to worship, share a meal, and open the Scriptures together.' },
+  { title: 'Grow', text: 'Real conversations and real friendships help every person take their next step with Jesus.' },
+  { title: 'Go', text: 'Each home church serves its own neighborhood and multiplies when it is ready.' },
+];
+
+const nextEvent = events[0];
+---
+
+<BaseLayout>
+  <section class="hero">
+    <div class="container">
+      <span class="eyebrow">A church of home churches</span>
+      <h1>Church that feels like family.</h1>
+      <p class="lead">{site.tagline} {site.name} is planting home churches so everyone has a place to belong, grow, and serve.</p>
+      <div class="btn-row">
+        <a class="btn btn--primary" href="/home-churches">Find a Home Church</a>
+        <a class="btn btn--outline" href="/host">Open Your Home</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <span class="eyebrow">How it works</span>
+      <h2>Gather. Grow. Go.</h2>
+      <div class="grid grid--3">
+        {pillars.map((p) => (
+          <article class="card">
+            <h3>{p.title}</h3>
+            <p>{p.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tint" id="schedule">
+    <div class="container">
+      <span class="eyebrow">Weekly schedule</span>
+      <h2>When home churches meet</h2>
+      <p class="lead">Find a night that works for you, then tap a group to connect with its hosts.</p>
+      <WeeklyCalendar />
+      <div class="btn-row">
+        <a class="btn btn--dark" href="/home-churches">Browse all home churches</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--dark">
+    <div class="container grid grid--2 split">
+      <div>
+        <span class="eyebrow">What to expect</span>
+        <h2>A typical evening</h2>
+        <p class="lead">Expect a warm welcome, a shared meal, some songs, and an open conversation about the Bible. Kids are welcome, questions are welcome, and you don't need to have it all figured out.</p>
+        <a class="btn btn--primary" href="/about">Learn more about us</a>
+      </div>
+      <ol class="timeline">
+        <li><strong>Welcome &amp; meal</strong> Arrive, meet people, eat together.</li>
+        <li><strong>Worship</strong> A few songs and time to pray.</li>
+        <li><strong>Discussion</strong> Read a passage and talk about it together.</li>
+        <li><strong>Prayer &amp; send</strong> Pray for one another and the week ahead.</li>
+      </ol>
+    </div>
+  </section>
+
+  {nextEvent && (
+    <section class="section section--tint">
+      <div class="container">
+        <span class="eyebrow">Coming up</span>
+        <h2>{nextEvent.title}</h2>
+        <p class="lead">{nextEvent.description}</p>
+        <a class="btn btn--dark" href="/events">See all events</a>
+      </div>
+    </section>
+  )}
+
+  <CallToAction
+    title="Ready to start something?"
+    text="Every home church starts with one open door. We will train and support you every step of the way."
+    href="/host"
+    label="Host a Home Church"
+  />
+</BaseLayout>
+
+<style>
+  .hero {
+    background:
+      radial-gradient(circle at 80% 20%, rgb(107 127 58 / 0.45), transparent 55%),
+      linear-gradient(160deg, var(--black) 40%, var(--olive-900));
+    color: var(--olive-100);
+    padding-block: clamp(5rem, 14vw, 9rem);
+  }
+  .hero h1 { color: var(--white); max-width: 16ch; }
+  .hero .eyebrow { color: var(--olive-300); }
+  .hero .lead { color: var(--olive-100); }
+
+  .split { align-items: center; }
+  .timeline {
+    list-style: none;
+    counter-reset: step;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1rem;
+  }
+  .timeline li {
+    counter-increment: step;
+    position: relative;
+    padding: 1rem 1rem 1rem 3.75rem;
+    background: #1b1d17;
+    border-radius: var(--radius);
+    border-left: 4px solid var(--olive-500);
+  }
+  .timeline li::before {
+    content: counter(step);
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    width: 2rem;
+    height: 2rem;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--olive-600);
+    color: var(--white);
+    font-weight: 700;
+  }
+  .timeline strong { display: block; color: var(--white); }
+</style>

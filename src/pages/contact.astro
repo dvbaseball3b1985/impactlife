@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { site } from '../data/site';
+---
+
+<BaseLayout title="Contact" description={`Get in touch with ${site.name}.`}>
+  <PageHero
+    eyebrow="Say hello"
+    title="Contact us"
+    lead="Have a question, want to join a home church, or need prayer? Call, email, or stop by. We'd love to hear from you."
+  />
+
+  <section class="section">
+    <div class="container">
+      <aside class="card info">
+        <h3>Get in touch</h3>
+        <p><strong>Email</strong><br /><a href={`mailto:${site.email}`}>{site.email}</a></p>
+        <p><strong>Phone</strong><br /><a href={`tel:${site.phone}`}>{site.phone}</a></p>
+        <p><strong>Address</strong><br />{site.address}</p>
+        <p class="small">We don't have a central building. We meet in homes across the city and gather together monthly.</p>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .info { max-width: 560px; background: var(--black); color: var(--olive-100); }
+  .info h3 { color: var(--white); }
+  .info strong { color: var(--olive-300); }
+  .info a { color: var(--white); }
+  .small { font-size: 0.9rem; color: #b9bca9; }
+</style>

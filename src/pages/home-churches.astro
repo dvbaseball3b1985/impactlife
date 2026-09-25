@@ -1,0 +1,86 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import CallToAction from '../components/CallToAction.astro';
+import { homeChurches } from '../data/site';
+
+const days = [...new Set(homeChurches.map((c) => c.day))];
+---
+
+<BaseLayout title="Find a Home Church" description="Browse home churches by neighborhood and day of the week.">
+  <PageHero
+    eyebrow="Find your people"
+    title="Find a home church near you"
+    lead="Every home church meets weekly in a home. Find one that fits your schedule and reach out. We'll connect you with the hosts."
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="filters" role="group" aria-label="Filter by day">
+        <button class="chip active" data-day="all" aria-pressed="true">All days</button>
+        {days.map((d) => (
+          <button class="chip" data-day={d} aria-pressed="false">{d}</button>
+        ))}
+      </div>
+
+      <div class="grid grid--3" id="church-list">
+        {homeChurches.map((c) => (
+          <article class="card church" data-day={c.day}>
+            {c.area && <span class="tag">{c.area}</span>}
+            <h3>{c.name}</h3>
+            <p class="meta">{c.day}s · {c.time}</p>
+            {c.kids !== undefined && <p class="meta">{c.kids ? 'Kids welcome' : 'Adults'}</p>}
+            <a class="btn btn--primary" href="/contact">Connect with this group</a>
+          </article>
+        ))}
+      </div>
+      <p class="note">Addresses are shared privately with guests after you connect.</p>
+    </div>
+  </section>
+
+  <CallToAction
+    title="Don't see one near you?"
+    text="That might be your invitation to start one. We'll walk with you."
+    href="/host"
+    label="Host a Home Church"
+  />
+</BaseLayout>
+
+<script>
+  const chips = document.querySelectorAll<HTMLButtonElement>('.chip');
+  const cards = document.querySelectorAll<HTMLElement>('.church');
+  chips.forEach((chip) => {
+    chip.addEventListener('click', () => {
+      const day = chip.dataset.day;
+      chips.forEach((c) => {
+        const on = c === chip;
+        c.classList.toggle('active', on);
+        c.setAttribute('aria-pressed', String(on));
+      });
+      cards.forEach((card) => {
+        card.hidden = day !== 'all' && card.dataset.day !== day;
+      });
+    });
+  });
+</script>
+
+<style>
+  .filters { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2rem; }
+  .chip {
+    font: inherit;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 0.45rem 1rem;
+    border-radius: 999px;
+    border: 2px solid var(--black);
+    background: transparent;
+    color: var(--black);
+    cursor: pointer;
+  }
+  .chip:hover { background: var(--olive-100); }
+  .chip.active { background: var(--black); color: var(--white); }
+  .church h3 { margin-top: 0.75rem; }
+  .meta { color: var(--muted); margin-bottom: 0.4rem; }
+  .church .btn { margin-top: 0.75rem; }
+  .note { margin-top: 2rem; color: var(--muted); font-size: 0.95rem; }
+</style>

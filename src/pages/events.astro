@@ -1,0 +1,81 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import CallToAction from '../components/CallToAction.astro';
+import { events } from '../data/site';
+
+const fmt = (iso: string) => {
+  const d = new Date(`${iso}T12:00:00`);
+  return {
+    month: d.toLocaleString('en-US', { month: 'short' }),
+    day: d.getDate(),
+    full: d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' }),
+  };
+};
+---
+
+<BaseLayout title="Events" description="Upcoming gatherings, trainings, and service days.">
+  <PageHero
+    eyebrow="Together"
+    title="Events"
+    lead="Beyond our weekly home churches, we gather as one family for worship, training, and serving our city."
+  />
+
+  <section class="section">
+    <div class="container events">
+      {events.map((e) => {
+        const d = fmt(e.date);
+        return (
+          <article class="event card">
+            <div class="date" aria-hidden="true">
+              <span class="m">{d.month}</span>
+              <span class="d">{d.day}</span>
+            </div>
+            <div>
+              <h3>{e.title}</h3>
+              <p class="meta"><time datetime={e.date}>{d.full}</time> · {e.location}</p>
+              <p>{e.description}</p>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  </section>
+
+  <CallToAction
+    title="Questions about an event?"
+    text="Reach out and we'll get you the details."
+    href="/contact"
+    label="Contact Us"
+  />
+</BaseLayout>
+
+<style>
+  .events { display: grid; gap: 1.25rem; }
+  .event {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.5rem;
+    align-items: start;
+  }
+  .date {
+    width: 76px;
+    text-align: center;
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--black);
+    color: var(--white);
+  }
+  .m {
+    display: block;
+    background: var(--olive-600);
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 0.2rem 0;
+  }
+  .d { display: block; font-family: var(--font-display); font-size: 1.9rem; font-weight: 700; padding: 0.3rem 0; }
+  .meta { color: var(--muted); font-size: 0.95rem; }
+  .event h3 { margin-bottom: 0.25rem; }
+</style>

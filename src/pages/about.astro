@@ -1,0 +1,97 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import CallToAction from '../components/CallToAction.astro';
+import { site } from '../data/site';
+
+const beliefs = [
+  { title: 'Jesus at the center', text: 'We follow Jesus and believe the good news changes everything.' },
+  { title: 'The Bible as our guide', text: 'We read Scripture together and let it shape how we live.' },
+  { title: 'Everyone is a minister', text: 'Every believer has gifts to share, not just the people on a stage.' },
+  { title: 'Church is a family', text: 'We are a spiritual family that eats, prays, and does life together.' },
+];
+
+const team = [
+  { name: 'Clark Stricklin', role: 'Lead Pastor' },
+];
+---
+
+<BaseLayout title="About" description={`Who we are and what we believe at ${site.name}.`}>
+  <PageHero
+    eyebrow="About us"
+    title="Small gatherings, big impact."
+    lead={`${site.name} is a network of home churches. We believe church is a people, not a building, and some of the best church happens around a kitchen table.`}
+  />
+
+  <section class="section">
+    <div class="container grid grid--2">
+      <div>
+        <span class="eyebrow">Our story</span>
+        <h2>Why home churches?</h2>
+        <p>The early church met house to house, sharing meals and devoting themselves to teaching, fellowship, and prayer (Acts 2:42–47). We want to recover that simplicity.</p>
+        <p>Home churches are easy to join and easy to start. They're close to where people live, and everyone gets to take part.</p>
+      </div>
+      <div>
+        <span class="eyebrow">Our vision</span>
+        <h2>A home church in every neighborhood</h2>
+        <p>We are praying for home churches across our city, each one caring for its neighbors and multiplying into new ones.</p>
+        <p>Once a month, all our home churches gather together to worship, celebrate, and be sent out again.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tint">
+    <div class="container">
+      <span class="eyebrow">What we believe</span>
+      <h2>Our core convictions</h2>
+      <div class="grid grid--2">
+        {beliefs.map((b) => (
+          <article class="card">
+            <h3>{b.title}</h3>
+            <p>{b.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--dark">
+    <div class="container">
+      <span class="eyebrow">Leadership</span>
+      <h2>Meet the team</h2>
+      <div class="grid grid--3">
+        {team.map((t) => (
+          <article class="card person">
+            <div class="avatar" aria-hidden="true">{t.name.charAt(0)}</div>
+            <h3>{t.name}</h3>
+            <p>{t.role}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CallToAction
+    title="Come see for yourself"
+    text="The best way to get to know us is to join a home church for a meal."
+    href="/home-churches"
+    label="Find a Home Church"
+  />
+</BaseLayout>
+
+<style>
+  .person { text-align: center; }
+  .avatar {
+    width: 88px;
+    height: 88px;
+    margin: 0 auto 1rem;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--olive-600);
+    color: var(--white);
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 700;
+  }
+</style>
