@@ -23,23 +23,14 @@ export const homeChurches: HomeChurch[] = [
   { name: 'Mixed Gayle St Group', day: 'Thursday', time: '6:00 PM' },
 ];
 
-export const events = [
+// Use `date` (YYYY-MM-DD) for one-time events, or `weekday` for weekly ones.
+type Event = { title: string; location: string; description: string; date?: string; weekday?: string };
+
+export const events: Event[] = [
   {
-    date: '2026-10-11',
+    weekday: 'Sunday',
     title: 'All-Church Gathering',
-    location: 'City Park Pavilion',
+    location: 'Impact Life Church',
     description: 'Every home church together for worship, a meal, and stories.',
-  },
-  {
-    date: '2026-10-25',
-    title: 'Host Training Night',
-    location: 'Online',
-    description: 'For anyone thinking about opening their home. Q&A with current hosts.',
-  },
-  {
-    date: '2026-11-08',
-    title: 'Serve the City Day',
-    location: 'Various locations',
-    description: 'Home churches partner with local organizations for a day of service.',
   },
 ];

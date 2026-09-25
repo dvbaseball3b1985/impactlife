@@ -24,16 +24,18 @@ const fmt = (iso: string) => {
   <section class="section">
     <div class="container events">
       {events.map((e) => {
-        const d = fmt(e.date);
+        const d = e.date ? fmt(e.date) : null;
         return (
           <article class="event card">
             <div class="date" aria-hidden="true">
-              <span class="m">{d.month}</span>
-              <span class="d">{d.day}</span>
+              <span class="m">{d ? d.month : 'Every'}</span>
+              <span class="d">{d ? d.day : e.weekday?.slice(0, 3)}</span>
             </div>
             <div>
               <h3>{e.title}</h3>
-              <p class="meta"><time datetime={e.date}>{d.full}</time> · {e.location}</p>
+              <p class="meta">
+                {d ? <time datetime={e.date}>{d.full}</time> : `Every ${e.weekday}`} · {e.location}
+              </p>
               <p>{e.description}</p>
             </div>
           </article>
