@@ -15,6 +15,25 @@ interface Props {
 const { title, description = site.tagline } = Astro.props;
 const fullTitle = title ? `${title} | ${site.name}` : `${site.name} | Home Churches`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
+const { location } = site;
+
+// Structured data so search engines can show the church's address in local results
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Church',
+  name: site.name,
+  url: Astro.site?.href,
+  email: site.email,
+  telephone: site.phone,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: location.street,
+    addressLocality: location.city,
+    addressRegion: location.state,
+    postalCode: location.zip,
+    addressCountry: location.country,
+  },
+};
 ---
 
 <!doctype html>
@@ -30,6 +49,10 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="geo.region" content={`${location.country}-${location.state}`} />
+    <meta name="geo.placename" content={location.city} />
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
   </head>
   <body>
     <a class="sr-only skip-link" href="#main">Skip to content</a>

@@ -4,6 +4,13 @@ export const site = {
   email: 'impactlife@hotmail.com',
   phone: '682-352-2145',
   address: '601 SW Alsbury Blvd, Burleson, TX 76028',
+  location: {
+    street: '601 SW Alsbury Blvd',
+    city: 'Burleson',
+    state: 'TX',
+    zip: '76028',
+    country: 'US',
+  },
 };
 
 export const nav = [
