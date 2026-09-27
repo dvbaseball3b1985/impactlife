@@ -1,6 +1,7 @@
 ---
 import { nav, site } from '../data/site';
 import Logo from './Logo.astro';
+import FacebookLink from './FacebookLink.astro';
 const year = new Date().getFullYear();
 ---
 
@@ -23,6 +24,7 @@ const year = new Date().getFullYear();
         <a href={`tel:${site.phone}`}>{site.phone}</a><br />
         {site.address}
       </p>
+      <FacebookLink />
     </div>
   </div>
   <div class="container legal">© {year} {site.name}. All rights reserved.</div>

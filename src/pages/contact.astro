@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import { site } from '../data/site';
+import FacebookLink from '../components/FacebookLink.astro';
 ---
 
 <BaseLayout title="Contact" description={`Get in touch with ${site.name}.`}>
@@ -18,6 +19,7 @@ import { site } from '../data/site';
         <p><strong>Email</strong><br /><a href={`mailto:${site.email}`}>{site.email}</a></p>
         <p><strong>Phone</strong><br /><a href={`tel:${site.phone}`}>{site.phone}</a></p>
         <p><strong>Address</strong><br />{site.address}</p>
+        <p><strong>Follow us</strong><br /><FacebookLink label /></p>
         <p class="small">We don't have a central building. We meet in homes across the city and gather together monthly.</p>
       </aside>
     </div>
