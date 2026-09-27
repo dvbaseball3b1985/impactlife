@@ -5,6 +5,7 @@ export const site = {
   phone: '682-352-2145',
   address: '601 SW Alsbury Blvd, Burleson, TX 76028',
   facebook: 'https://www.facebook.com/ImpactLifeC',
+  instagram: 'https://www.instagram.com/impactlifefamilychurch',
   location: {
     street: '601 SW Alsbury Blvd',
     city: 'Burleson',

@@ -1,7 +1,7 @@
 ---
 import { nav, site } from '../data/site';
 import Logo from './Logo.astro';
-import FacebookLink from './FacebookLink.astro';
+import SocialLink from './SocialLink.astro';
 const year = new Date().getFullYear();
 ---
 
@@ -24,7 +24,10 @@ const year = new Date().getFullYear();
         <a href={`tel:${site.phone}`}>{site.phone}</a><br />
         {site.address}
       </p>
-      <FacebookLink />
+      <div class="social-row">
+        <SocialLink platform="facebook" />
+        <SocialLink platform="instagram" />
+      </div>
     </div>
   </div>
   <div class="container legal">© {year} {site.name}. All rights reserved.</div>
@@ -48,5 +51,6 @@ const year = new Date().getFullYear();
   ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.35rem; }
   a { color: var(--olive-100); text-decoration: none; }
   a:hover { color: var(--white); text-decoration: underline; }
+  .social-row { display: flex; gap: 1rem; }
   .legal { border-top: 1px solid #2a2c25; margin-top: 2rem; padding-block: 1.25rem; font-size: 0.85rem; }
 </style>
