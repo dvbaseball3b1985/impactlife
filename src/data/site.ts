@@ -28,7 +28,7 @@ type HomeChurch = { name: string; day: string; time: string; area?: string; kids
 
 export const homeChurches: HomeChurch[] = [
   { name: "Men's Alsbury Group", day: 'Sunday', time: '9:30 AM' },
-  { name: "Women's Alsbury Group", day: 'Wednesday', time: '6:00 PM' },
+  { name: "Women's Alsbury Group", day: 'Tuesday', time: '6:00 PM' },
   { name: 'Mixed Gayle St Group', day: 'Thursday', time: '6:00 PM' },
 ];
 
