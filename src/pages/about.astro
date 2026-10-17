@@ -1,97 +1,71 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
-import CallToAction from '../components/CallToAction.astro';
 import { site } from '../data/site';
-
-const beliefs = [
-  { title: 'Jesus at the center', text: 'We follow Jesus and believe the good news changes everything.' },
-  { title: 'The Bible as our guide', text: 'We read Scripture together and let it shape how we live.' },
-  { title: 'Everyone is a minister', text: 'Every believer has gifts to share, not just the people on a stage.' },
-  { title: 'Church is a family', text: 'We are a spiritual family that eats, prays, and does life together.' },
-];
-
-const team = [
-  { name: 'Clark Stricklin', role: 'Lead Pastor' },
-];
 ---
 
 <BaseLayout title="About" description={`Who we are and what we believe at ${site.name}.`}>
   <PageHero
-    eyebrow="About us"
-    title="Small gatherings, big impact."
-    lead={`${site.name} is a network of home churches. We believe church is a people, not a building, and some of the best church happens around a kitchen table.`}
+    title="About Us"
+    lead="Impact Life Church is a Bible-believing home church, a small fellowship gathered around God’s Word and open to people from every background. We exist to give you a place to seek, grow, and serve, right around the table with people who know your name."
   />
 
   <section class="section">
     <div class="container grid grid--2">
-      <div>
-        <span class="eyebrow">Our story</span>
-        <h2>Why home churches?</h2>
-        <p>The early church met house to house, sharing meals and devoting themselves to teaching, fellowship, and prayer (Acts 2:42–47). We want to recover that simplicity.</p>
-        <p>Home churches are easy to join and easy to start. They're close to where people live, and everyone gets to take part.</p>
-      </div>
-      <div>
-        <span class="eyebrow">Our vision</span>
-        <h2>A home church in every neighborhood</h2>
-        <p>We are praying for home churches across our city, each one caring for its neighbors and multiplying into new ones.</p>
-        <p>Once a month, all our home churches gather together to worship, celebrate, and be sent out again.</p>
-      </div>
+      <article class="card">
+        <h3>Everything is about Jesus.</h3>
+        <p>We want Him at the center of all we do, and our church is, and always must be, about Him.</p>
+      </article>
+      <article class="card">
+        <h3>Everything begins in the family.</h3>
+        <p>That’s why we meet in homes, where real relationships grow and no one gets lost in a crowd.</p>
+      </article>
     </div>
   </section>
 
   <section class="section section--tint">
-    <div class="container">
-      <span class="eyebrow">What we believe</span>
-      <h2>Our core convictions</h2>
-      <div class="grid grid--2">
-        {beliefs.map((b) => (
-          <article class="card">
-            <h3>{b.title}</h3>
-            <p>{b.text}</p>
-          </article>
-        ))}
-      </div>
+    <div class="container prose">
+      <h2>Our Mission</h2>
+      <p class="mission">To impact families with the Gospel and help them live out their faith to impact their world.</p>
+
+      <h2>Our Vision</h2>
+      <p>Impact Life Church desires to be a small fellowship completely surrendered to God’s will, living in the abundance He has for His children.</p>
+      <p>That abundance isn’t the material things of this world. It’s the overflowing fruit of His Holy Spirit:</p>
+      <blockquote>
+        <p>“But the fruit of the Spirit is love, joy, peace, longsuffering, kindness, goodness, faithfulness, gentleness, self-control. Against such there is no law.”</p>
+        <cite>Galatians 5:22-23, NKJV</cite>
+      </blockquote>
+      <p>It also means using the gifts He has given each of us to serve Him, and in a small group, everyone’s gifts are needed.</p>
     </div>
   </section>
 
   <section class="section section--dark">
-    <div class="container">
-      <span class="eyebrow">Leadership</span>
-      <h2>Meet the team</h2>
-      <div class="grid grid--3">
-        {team.map((t) => (
-          <article class="card person">
-            <div class="avatar" aria-hidden="true">{t.name.charAt(0)}</div>
-            <h3>{t.name}</h3>
-            <p>{t.role}</p>
-          </article>
-        ))}
-      </div>
+    <div class="container prose">
+      <h2>What to Expect</h2>
+      <p>Here you are family, so expect a lot of love. Come as you are, in whatever style of dress, and we’ll offer you a warm welcome and a hand of friendship. We want you to become who God has called you to be, and we enjoy every flower in God’s garden of life.</p>
+      <p>Our gatherings are relaxed and personal. Worship is contemporary, sometimes with different styles when guest musicians join us. The teaching is relevant and Bible-centered, challenging believers to live fully for God and inviting the weary soul to receive Christ as Lord and Savior. There’s time for conversation, questions, and prayer for one another. We like to have fun, and we celebrate the abundant life He has for us!</p>
     </div>
   </section>
-
-  <CallToAction
-    title="Come see for yourself"
-    text="The best way to get to know us is to join a home church for a meal."
-    href="/home-churches"
-    label="Find a Home Church"
-  />
 </BaseLayout>
 
 <style>
-  .person { text-align: center; }
-  .avatar {
-    width: 88px;
-    height: 88px;
-    margin: 0 auto 1rem;
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    background: var(--olive-600);
-    color: var(--white);
+  .prose { max-width: 760px; }
+  .prose h2:not(:first-child) { margin-top: 2.5rem; }
+  .mission {
     font-family: var(--font-display);
-    font-size: 2rem;
-    font-weight: 700;
+    font-size: 1.35rem;
+    line-height: 1.5;
+    color: var(--olive-700);
   }
+  blockquote {
+    margin: 1.5rem 0;
+    padding: 1rem 1.5rem;
+    border-left: 4px solid var(--olive-600);
+    background: var(--white);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    font-style: italic;
+  }
+  blockquote p { margin: 0 0 0.5rem; }
+  cite { font-style: normal; font-weight: 600; font-size: 0.9rem; color: var(--muted); }
+  cite::before { content: "— "; }
 </style>
