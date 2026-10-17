@@ -21,6 +21,7 @@ export const nav = [
   { href: '/home-churches', label: 'Find a Home Church' },
   { href: '/host', label: 'Host a Church' },
   { href: '/events', label: 'Events' },
+  { href: '/gallery', label: 'Gallery' },
   { href: '/contact', label: 'Contact' },
 ];
 
@@ -43,3 +44,7 @@ export const events: Event[] = [
     description: 'Every home church together for worship, a meal, and stories.',
   },
 ];
+
+// Add photos here after putting the image files in /public/gallery.
+// Example: { src: '/gallery/picnic.jpg', alt: 'Families sharing a meal at the picnic' }
+export const photos: { src: string; alt: string; caption?: string }[] = [];

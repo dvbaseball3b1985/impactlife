@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { photos } from '../data/site';
+---
+
+<BaseLayout title="Gallery" description="Photos from Impact Life Church gatherings and events.">
+  <PageHero
+    eyebrow="Life together"
+    title="Photo gallery"
+    lead="A look at life together around the table."
+  />
+
+  <section class="section">
+    <div class="container">
+      {photos.length ? (
+        <div class="gallery">
+          {photos.map((p) => (
+            <figure>
+              <img src={p.src} alt={p.alt} loading="lazy" />
+              {p.caption && <figcaption>{p.caption}</figcaption>}
+            </figure>
+          ))}
+        </div>
+      ) : (
+        <div class="empty card">
+          <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <rect x="3" y="4" width="18" height="16" rx="2" />
+            <circle cx="9" cy="10" r="1.8" />
+            <path d="m3 17 5-5 4 4 3-3 6 6" />
+          </svg>
+          <h3>Photos coming soon</h3>
+          <p>Check back soon for pictures from our gatherings and events.</p>
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .empty { text-align: center; padding-block: 3.5rem; color: var(--muted); }
+  .empty svg { color: var(--olive-500); margin: 0 auto 1rem; }
+  .gallery {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+  }
+  figure { margin: 0; }
+  img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius); box-shadow: var(--shadow); }
+  figcaption { margin-top: 0.4rem; font-size: 0.9rem; color: var(--muted); }
+</style>
