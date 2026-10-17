@@ -34,11 +34,12 @@ export const homeChurches: HomeChurch[] = [
 ];
 
 // Use `date` (YYYY-MM-DD) for one-time events, or `weekday` for weekly ones.
-type Event = { title: string; location: string; description: string; date?: string; weekday?: string };
+type Event = { title: string; location: string; description: string; date?: string; weekday?: string; time?: string };
 
 export const events: Event[] = [
   {
     weekday: 'Sunday',
+    time: '10:30 AM',
     title: 'All-Church Gathering',
     location: 'Impact Life Church',
     description: 'Every home church together for worship, a meal, and stories.',

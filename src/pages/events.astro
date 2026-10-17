@@ -34,7 +34,7 @@ const fmt = (iso: string) => {
             <div>
               <h3>{e.title}</h3>
               <p class="meta">
-                {d ? <time datetime={e.date}>{d.full}</time> : `Every ${e.weekday}`} · {e.location}
+                {d ? <time datetime={e.date}>{d.full}</time> : `Every ${e.weekday}`}{e.time && ` at ${e.time}`} · {e.location}
               </p>
               <p>{e.description}</p>
             </div>
