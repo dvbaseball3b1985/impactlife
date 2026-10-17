@@ -1,7 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
+import { Image } from 'astro:assets';
 import { site } from '../data/site';
+import pastorPhoto from '../assets/clark-stricklin.jpg';
 ---
 
 <BaseLayout title="About" description={`Who we are and what we believe at ${site.name}.`}>
@@ -46,9 +48,40 @@ import { site } from '../data/site';
       <p>Our gatherings are relaxed and personal. Worship is contemporary, sometimes with different styles when guest musicians join us. The teaching is relevant and Bible-centered, challenging believers to live fully for God and inviting the weary soul to receive Christ as Lord and Savior. There’s time for conversation, questions, and prayer for one another. We like to have fun, and we celebrate the abundant life He has for us!</p>
     </div>
   </section>
+
+  <section class="section">
+    <div class="container">
+      <span class="eyebrow">Leadership</span>
+      <h2>Our Pastor</h2>
+      <article class="card pastor">
+        <Image
+          src={pastorPhoto}
+          alt="Clark Stricklin"
+          width={320}
+          height={390}
+          densities={[1, 2]}
+          class="pastor-photo"
+        />
+        <h3>Clark Stricklin</h3>
+        <p>Pastor</p>
+      </article>
+    </div>
+  </section>
 </BaseLayout>
 
 <style>
+  .pastor { max-width: 340px; text-align: center; }
+  .pastor :global(.pastor-photo) {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: top;
+    border-radius: var(--radius);
+    margin-bottom: 1rem;
+  }
+  .pastor h3 { margin-bottom: 0.15rem; }
+  .pastor p { color: var(--muted); }
   .prose { max-width: 760px; }
   .prose h2:not(:first-child) { margin-top: 2.5rem; }
   .mission {
