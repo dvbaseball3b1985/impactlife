@@ -42,7 +42,7 @@ export const events: Event[] = [
     time: '10:30 AM',
     title: 'All-Church Gathering',
     location: 'Impact Life Church',
-    description: 'Every home church together for worship and stories.',
+    description: 'Every home church together for worship and sermon.',
   },
 ];
 
