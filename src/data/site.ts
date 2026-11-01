@@ -48,4 +48,6 @@ export const events: Event[] = [
 
 // Add photos here after putting the image files in /public/gallery.
 // Example: { src: '/gallery/picnic.jpg', alt: 'Families sharing a meal at the picnic' }
-export const photos: { src: string; alt: string; caption?: string }[] = [];
+export const photos: { src: string; alt: string; caption?: string }[] = [
+  { src: '/gallery/fellowship.jpg', alt: 'Two members of Impact Life Church smiling together, one holding a Bible' },
+];
